@@ -1,0 +1,4 @@
+==========./testcases/loop/loop-1.cminus==========
+==========./testcases/loop/loop-2.cminus==========
+==========./testcases/loop/loop-3.cminus==========
+==========./testcases/loop/loop-4.cminus==========
