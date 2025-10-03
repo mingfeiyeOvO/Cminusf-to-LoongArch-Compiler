@@ -25,7 +25,7 @@ cmake-build-*/
 *.la
 *.lo
 
-# Shared objects (inc. Windows DLLs)
+# Shared objects
 *.dll
 *.so
 *.so.*
@@ -165,28 +165,3 @@ node_modules/
 ehthumbs.db
 Thumbs.db
 
-# Python (if any)
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Rust (if any)
-target/
-Cargo.lock
-
-# Java (if any)
-*.class
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.nar
-hs_err_pid*
