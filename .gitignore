@@ -1,0 +1,192 @@
+# Build directories
+build/
+bin/
+out/
+cmake-build-*/
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# CMake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+# Generated parser files
+*.tab.c
+*.tab.h
+lex.yy.c
+*.yy.c
+*.yy.h
+
+# IDE/Editor specific files
+## Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+## Vim
+*.swp
+*.swo
+*~
+.netrwhist
+
+## Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+## JetBrains IDEs
+.idea/
+*.iws
+*.iml
+*.ipr
+
+## Qt Creator
+*.autosave
+
+## Code::Blocks
+*.layout
+*.depend
+
+# Language Server Protocol files
+.clangd/
+.cache/
+
+# Other development tools
+.codegpt/
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+*.lock
+
+# Test outputs
+tests/*/output_student/
+tests/*/output_student_ast/
+
+# Coverage reports
+*.gcov
+*.gcda
+*.gcno
+lcov.info
+coverage/
+
+# Profiling data
+gmon.out
+*.prof
+
+# Core dumps
+core
+core.*
+
+# Package files
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Documentation build
+docs/_build/
+docs/html/
+docs/latex/
+
+# Dependencies
+.libs/
+libs/
+third_party/
+vendor/
+node_modules/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python (if any)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Rust (if any)
+target/
+Cargo.lock
+
+# Java (if any)
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.nar
+hs_err_pid*
