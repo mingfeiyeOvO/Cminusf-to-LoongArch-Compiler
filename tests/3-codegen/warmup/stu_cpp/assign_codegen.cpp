@@ -24,7 +24,6 @@ int main() {
     return 0;
 }
 
-// TODO: 按照提示补全
 void translate_main(CodeGen *codegen) {
     std::unordered_map<std::string, int> offset_map;
 
@@ -60,8 +59,8 @@ void translate_main(CodeGen *codegen) {
     // - %op0 的偏移量是多少字节?
     // - 数组的大小是多少字节?
     // - 数组的偏移量是多少字节?
-    offset_map["%op0"] = -24;  // TODO: 请填空
-    offset_map["array"] = -64; // TODO: 请填空
+    offset_map["%op0"] = -24;
+    offset_map["array"] = -64;
     codegen->append_inst("addi.d",
                          {"$t0", "$fp", std::to_string(offset_map["array"])});
     codegen->append_inst("st.d",
@@ -74,11 +73,10 @@ void translate_main(CodeGen *codegen) {
     // 将 gep 的值写入 %op1 对应的内存空间中
     // 你可以手动计算 gep 的值, 或者使用指令计算 gep 的值
     // 你需要思考 %op1 的偏移量是多少字节
-    offset_map["%op1"] = -72; // TODO: 请填空
+    offset_map["%op1"] = -72;
     // 获得数组的地址, 将其写入 $t0 中
     codegen->append_inst("ld.d",
                          {"$t0", "$fp", std::to_string(offset_map["%op0"])});
-    // TODO: 计算 %op1 的值, 并将其写入 %op1 对应的内存空间中
     codegen->append_inst("addi.d $t1, $t0, 0");
     codegen->append_inst("st.d",
                          {"$t1", "$fp", std::to_string(offset_map["%op1"])});
@@ -98,11 +96,10 @@ void translate_main(CodeGen *codegen) {
     // 将 gep 的值写入 %op2 对应的内存空间中
     // 你可以手动计算 gep 的值, 或者使用指令计算 gep 的值
     // 你需要思考 %op2 的偏移量是多少字节
-    offset_map["%op2"] = -80; // TODO: 请填空
+    offset_map["%op2"] = -80;
     // 获得数组的地址, 将其写入 $t0 中
     codegen->append_inst("ld.d",
                          {"$t0", "$fp", std::to_string(offset_map["%op0"])});
-    // TODO: 计算 gep 的值, 并将其写入 %op2 对应的内存空间中
     codegen->append_inst("addi.d $t1, $t0, 4");
     codegen->append_inst("st.d",
                          {"$t1", "$fp", std::to_string(offset_map["%op2"])});
@@ -110,8 +107,7 @@ void translate_main(CodeGen *codegen) {
     /* %op3 = load i32, i32* %op1 */
     codegen->append_inst("%op3 = load i32, i32* %op1", ASMInstruction::Comment);
     // 将 %op1 指向的空间中存储的值写入 %op3 对应的内存空间中
-    offset_map["%op3"] = -84; // TODO: 请填空
-    // TODO: 先获得 %op1 的值, 然后获得 %op1 指向的空间的值, 最后将这个值写入
+    offset_map["%op3"] = -84;
     // %op3 对应的内存空间中
     codegen->append_inst("ld.d",
                          {"$t0", "$fp", std::to_string(offset_map["%op1"])});
@@ -121,8 +117,7 @@ void translate_main(CodeGen *codegen) {
 
     /* %op4 = mul i32 %op3, 3 */
     codegen->append_inst("%op4 = mul i32 %op3, 3", ASMInstruction::Comment);
-    offset_map["%op4"] = -88; // TODO: 请填空
-    // TODO: 先获得 %op3 的值, 然后将其乘以 3, 最后将结果写入 %op4 对应的内存空
+    offset_map["%op4"] = -88;
     // 间中
     codegen->append_inst("ld.w",
                          {"$t0", "$fp", std::to_string(offset_map["%op3"])});
@@ -134,7 +129,6 @@ void translate_main(CodeGen *codegen) {
     /* store i32 %op4, i32* %op2 */
     codegen->append_inst("store i32 %op4, i32* %op2", ASMInstruction::Comment);
     // 将 %op4 的值写入 %op2 指向的空间中
-    // TODO: 先获得 %op4 的值, 然后将其写入 %op2 指向的空间中
     codegen->append_inst("ld.w",
                          {"$t0", "$fp", std::to_string(offset_map["%op4"])});
     codegen->append_inst("ld.d",
@@ -143,9 +137,8 @@ void translate_main(CodeGen *codegen) {
 
     /* %op5 = load i32, i32* %op2 */
     // 将 %op2 指向的空间中存储的值写入 %op5 对应的内存空间中
-    offset_map["%op5"] = -92; // TODO: 请填空
+    offset_map["%op5"] = -92;
     codegen->append_inst("%op5 = load i32, i32* %op2", ASMInstruction::Comment);
-    // TODO: 先获得 %op2 的值, 然后获得 %op2 指向的空间的值, 最后将这个值写入
     // %op5 对应的内存空间中指向的空间中
     codegen->append_inst("ld.d",
                          {"$t0", "$fp", std::to_string(offset_map["%op2"])});
@@ -155,7 +148,6 @@ void translate_main(CodeGen *codegen) {
 
     /* ret i32 %op5 */
     codegen->append_inst("ret i32 %op5", ASMInstruction::Comment);
-    // TODO: 将 %op5 的值写入 $a0 中
     codegen->append_inst("ld.w",
                          {"$a0", "$fp", std::to_string(offset_map["%op5"])});
     // 思考: 为什么不在这里 jr $ra, 而是跳转到 main_exit?

@@ -49,20 +49,22 @@ struct Config {
 int main(int argc, char **argv) {
     Config config(argc, argv);
 
+    // 2. 前端：词法语法分析生成语法树
     auto syntax_tree = parse(config.input_file.c_str());
     auto ast = AST(syntax_tree);
 
-    if (config.emitast) { // if emit ast (lab1), print ast and return
+    if (config.emitast) {
         ASTPrinter printer;
         ast.run_visitor(printer);
     } else {
+        // 3. 中端：AST转IR + 优化
         std::unique_ptr<Module> m;
         CminusfBuilder builder;
         ast.run_visitor(builder);
         m = builder.getModule();
 
+        // 4. 优化Pass管理
         PassManager PM(m.get());
-        // optimization 
         if(config.mem2reg) {
             PM.add_pass<Mem2Reg>();
             PM.add_pass<DeadCode>();

@@ -68,7 +68,6 @@ class Dominators : public Pass {
     void print_idom(Function *f);
     void print_dominance_frontier(Function *f);
 
-    // TODO 补充需要的函数
     std::list<BasicBlock *> reverse_post_order_{};
     std::map<BasicBlock *, int> post_order_id_{}; // the root has highest ID
 

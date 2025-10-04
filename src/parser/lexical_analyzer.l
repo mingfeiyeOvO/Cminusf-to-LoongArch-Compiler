@@ -38,7 +38,6 @@ void pass_node(char *text){
 ;	{pos_start = pos_end; pos_end += 1; pass_node(yytext); return SEMICOLON;}
 ,	{pos_start = pos_end; pos_end += 1; pass_node(yytext); return COMMA;}
 
- /* TODO: phase1. 请在这里补充其他的词法规则 */
 
 \(	{pos_start = pos_end; pos_end += 1; pass_node(yytext); return LPARENTHESE;}
 \)	{pos_start = pos_end; pos_end += 1; pass_node(yytext); return RPARENTHESE;}

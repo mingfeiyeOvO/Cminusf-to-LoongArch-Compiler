@@ -215,7 +215,6 @@ void CodeGen::gen_prologue() {
 }
 
 void CodeGen::gen_epilogue() {
-    // TODO 根据你的理解设定函数的 epilogue
     // 恢复栈指针（释放栈帧空间）
     if (IS_IMM_12(context.frame_size)) {
         // 如果栈帧大小可以用立即数表示，直接调整栈指针
@@ -234,7 +233,6 @@ void CodeGen::gen_epilogue() {
 }
 
 void CodeGen::gen_ret() {
-    // TODO 函数返回，思考如何处理返回值、寄存器备份，如何返回调用者地址
     if (context.func->get_return_type()->is_integer_type() || 
         context.func->get_return_type()->is_pointer_type()) {
         // 整数或指针返回值 -> $a0
@@ -255,7 +253,6 @@ void CodeGen::gen_ret() {
 void CodeGen::gen_br() {
     auto *branchInst = static_cast<BranchInst *>(context.inst);
     if (branchInst->is_cond_br()) {
-        // TODO 补全条件跳转的情况
         // 获取条件操作数和两个目标基本块
         auto *cond = branchInst->get_operand(0);
         auto *trueBB = static_cast<BasicBlock *>(branchInst->get_operand(1));
@@ -296,7 +293,6 @@ void CodeGen::gen_binary() {
 }
 
 void CodeGen::gen_float_binary() {
-    // TODO 浮点类型的二元指令
     // 获取操作数和指令类型
     auto *inst = context.inst;
     auto *operand1 = inst->get_operand(0);
@@ -329,7 +325,6 @@ void CodeGen::gen_alloca() {
     /* 我们已经为 alloca 的内容分配空间，在此我们还需保存 alloca
      * 指令自身产生的定值，即指向 alloca 空间起始地址的指针
      */
-    // TODO 将 alloca 出空间的起始地址保存在栈帧上
     auto *allocaInst = static_cast<AllocaInst*>(context.inst);
     int offset = context.offset_map.at(context.inst) - allocaInst->get_alloca_type()->get_size();
     // 分配内存，调整栈指针
@@ -347,7 +342,6 @@ void CodeGen::gen_load() {
         append_inst("fld.s $ft0, $t0, 0");
         store_from_freg(context.inst, FReg::ft(0));
     } else {
-        // TODO load 整数类型的数据
         if (type->is_int1_type()) { // 1 字节整数
             append_inst("ld.b $t1, $t0, 0");
         } else if (type->is_int32_type()) {     // 4 字节整数
@@ -361,7 +355,6 @@ void CodeGen::gen_load() {
 }
 
 void CodeGen::gen_store() {
-    // TODO 翻译 store 指令
     auto *value = context.inst->get_operand(0);  // 待存储的值
     auto *ptr = context.inst->get_operand(1); // 存储目标地址
     // 加载目标地址到 $t0
@@ -386,7 +379,6 @@ void CodeGen::gen_store() {
 }
 
 void CodeGen::gen_icmp() {
-    // TODO 处理各种整数比较的情况
     auto *icmpInst = static_cast<ICmpInst *>(context.inst);
     // 加载操作数到寄存器
     load_to_greg(icmpInst->get_operand(0), Reg::t(0));
@@ -428,7 +420,6 @@ void CodeGen::gen_icmp() {
 }
 
 void CodeGen::gen_fcmp() {
-    // TODO 处理各种浮点数比较的情况
     auto *fcmpInst = static_cast<FCmpInst*>(context.inst);
     // 加载操作数到寄存器
     load_to_freg(fcmpInst->get_operand(0), FReg::ft(0));
@@ -463,7 +454,6 @@ void CodeGen::gen_fcmp() {
 }
 
 void CodeGen::gen_zext() {
-    // TODO 将窄位宽的整数数据进行零扩展
     auto *zextInst = static_cast<ZextInst *>(context.inst);
     // 获取操作数和类型信息
     auto *src = zextInst->get_operand(0);
@@ -483,7 +473,6 @@ void CodeGen::gen_zext() {
 }
 
 void CodeGen::gen_call() {
-    // TODO 函数调用，注意我们只需要通过寄存器传递参数，即不需考虑栈上传参的情况
     auto *callInst = static_cast<CallInst *>(context.inst);
     auto &args = callInst->get_operands();    // 获取函数参数
     int intArgCount = 0;  // 整数参数计数
@@ -541,7 +530,6 @@ void CodeGen::gen_call() {
  *       +
  */
 void CodeGen::gen_gep() {
-    // TODO 计算内存地址
     // 获取指令和基本操作数
     auto* gepInst = static_cast<GetElementPtrInst*>(context.inst);
     auto* base = gepInst->get_operand(0); // 基地址
@@ -590,7 +578,6 @@ void CodeGen::gen_gep() {
 
 
 void CodeGen::gen_sitofp() {
-    // TODO 整数转向浮点数
     auto* siInst = static_cast<SiToFpInst*>(context.inst);
     auto *srcValue = siInst->get_operand(0);
     // 将整数值加载到通用寄存器 t0
@@ -603,7 +590,6 @@ void CodeGen::gen_sitofp() {
 }
 
 void CodeGen::gen_fptosi() {
-    // TODO 浮点数转向整数，注意向下取整(round to zero)
     auto* fpInst = static_cast<FpToSiInst*>(context.inst);
     auto* srcValue = fpInst->get_operand(0);
     // 将浮点数值加载到寄存器 ft0

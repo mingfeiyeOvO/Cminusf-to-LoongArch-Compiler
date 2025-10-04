@@ -105,7 +105,6 @@ void Mem2Reg::generate_phi() {
 
 void Mem2Reg::rename(BasicBlock *bb) {
     std::vector<Instruction *> wait_delete;
-    // TODO
     for (auto &instr : bb->get_instructions()) {
         if (instr.is_phi()) {
             auto phi = dynamic_cast<PhiInst *>(&instr);

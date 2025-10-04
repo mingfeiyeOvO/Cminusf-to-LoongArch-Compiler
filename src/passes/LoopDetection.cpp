@@ -31,12 +31,6 @@ void LoopDetection::run() {
  */
 void LoopDetection::discover_loop_and_sub_loops(BasicBlock *bb, BBset &latches,
                                                 std::shared_ptr<Loop> loop) {
-    // TODO List:
-    // 1. 初始化工作表，将所有latch块加入
-    // 2. 实现主循环逻辑
-    // 3. 处理未分配给任何循环的节点
-    // 4. 处理已属于其他循环的节点
-    // 5. 建立正确的循环嵌套关系
 
     BBvec work_list = {latches.begin(), latches.end()}; // 初始化工作表
 
@@ -44,7 +38,6 @@ void LoopDetection::discover_loop_and_sub_loops(BasicBlock *bb, BBset &latches,
         auto bb = work_list.back();
         work_list.pop_back();
 
-        // TODO-1: 处理未分配给任何循环的节点
         if (bb_to_loop_.find(bb) == bb_to_loop_.end()) {
             /* 在此添加代码：
              * 1. 使用loop->add_block将bb加入当前循环
@@ -61,7 +54,6 @@ void LoopDetection::discover_loop_and_sub_loops(BasicBlock *bb, BBset &latches,
             }
         //throw std::runtime_error("Lab4: 你有一个TODO需要完成！");
         }
-        // TODO-2: 处理已属于其他循环的节点
         else if (bb_to_loop_[bb] != loop) {
             /* 在此添加代码：
              * 1. 获取bb当前所属的循环sub_loop

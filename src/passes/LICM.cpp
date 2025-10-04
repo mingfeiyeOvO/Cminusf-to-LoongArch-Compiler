@@ -44,7 +44,6 @@ void LoopInvariantCodeMotion::traverse_loop(std::shared_ptr<Loop> loop) {
     run_on_loop(loop);
 }
 
-// TODO: 实现collect_loop_info函数
 // 1. 遍历当前循环及其子循环的所有指令
 // 2. 收集所有指令到loop_instructions中
 // 3. 检查store指令是否修改了全局变量，如果是则添加到updated_global中
@@ -96,7 +95,6 @@ void LoopInvariantCodeMotion::run_on_loop(std::shared_ptr<Loop> loop) {
     std::vector<Value *> loop_invariant;
 
 
-    // TODO: 识别循环不变式指令
     //
     // - 如果指令已被标记为不变式则跳过
     // - 跳过 store、ret、br、phi 等指令与非纯函数调用
@@ -194,7 +192,6 @@ void LoopInvariantCodeMotion::run_on_loop(std::shared_ptr<Loop> loop) {
     // insert preheader
     auto preheader = loop->get_preheader();
     
-    // TODO: 更新 phi 指令
     for (auto &phi_inst_ : loop->get_header()->get_instructions()) {
         if (phi_inst_.get_instr_type() != Instruction::phi)
             continue;
@@ -210,7 +207,6 @@ void LoopInvariantCodeMotion::run_on_loop(std::shared_ptr<Loop> loop) {
         //throw std::runtime_error("Lab4: 你有一个TODO需要完成！");
     }
     
-    // TODO: 用跳转指令重构控制流图 
     // 将所有非 latch 的 header 前驱块的跳转指向 preheader
     // 并将 preheader 的跳转指向 header
     // 注意这里需要更新前驱块的后继和后继的前驱
@@ -249,7 +245,6 @@ void LoopInvariantCodeMotion::run_on_loop(std::shared_ptr<Loop> loop) {
         loop->get_header()->remove_pre_basic_block(pred);
     }
 
-    // TODO: 外提循环不变指令
     for (auto &inst : loop_invariant) {
         auto *instr = dynamic_cast<Instruction*>(inst);
         // 遍历循环中的所有基本块，查找并删除该指令

@@ -188,7 +188,6 @@ arg-list    :   arg-list COMMA expression {$$ = node( "arg-list", 3, $1, $2, $3)
 |   expression {$$ = node( "arg-list", 1, $1);}
 
 
-// TODO: phase1. 补充其他的文法产生式逻辑
 
 %%
 

@@ -12,7 +12,6 @@ class Mem2Reg : public Pass {
     Function *func_;
     std::unique_ptr<Dominators> dominators_;
     std::map<Value *, Value *> phi_map;
-    // TODO 添加需要的变量
 
     // 变量定值栈
     std::map<Value *, std::vector<Value *>> var_val_stack;

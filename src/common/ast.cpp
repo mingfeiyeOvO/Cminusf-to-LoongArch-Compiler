@@ -102,7 +102,6 @@ ASTNode *AST::transform_node_iter(syntax_tree_node *n) {
         params -> param-list | void
         param-list -> param-list , param | param
     */
-    // TODO: 1.fill in the fields of ASTFunDeclaration
     // 1.1 flatten params
     if (_STR_EQ(n->children[3]->children[0]->name, "param-list")) {
       std::stack<syntax_tree_node *> s;
@@ -141,7 +140,6 @@ ASTNode *AST::transform_node_iter(syntax_tree_node *n) {
     return node;
   } else if (_STR_EQ(n->name, "compound-stmt")) {
     auto node = new ASTCompoundStmt();
-    // TODO: 2.fill in the fields of ASTCompoundStmt
     /*
       文法表达式如下
       compound-stmt -> { local-declarations statement-list }
@@ -201,7 +199,6 @@ ASTNode *AST::transform_node_iter(syntax_tree_node *n) {
     return node;
   } else if (_STR_EQ(n->name, "selection-stmt")) {
     auto node = new ASTSelectionStmt();
-    // TODO: 5.fill in the fields of ASTSelectionStmt
     /*
       selection-stmt -> if ( expression ) statement | if ( expression )
       statement else statement ASTSelectionStmt的结构，需要填充的字段有
@@ -302,7 +299,6 @@ ASTNode *AST::transform_node_iter(syntax_tree_node *n) {
   } else if (_STR_EQ(n->name, "additive-expression")) {
     auto node = new ASTAdditiveExpression();
     if (n->children_num == 3) {
-      // TODO: 4.fill in the fields of ASTAdditiveExpression
       /*
         文法表达式如下
         additive-expression -> additive-expression addop term | term 
@@ -357,7 +353,6 @@ ASTNode *AST::transform_node_iter(syntax_tree_node *n) {
       return transform_node_iter(n->children[i]);
     else {
       auto num_node = new ASTNum();
-      // TODO: 3.fill in the fields of ASTNum
       /*
         文法表达式如下
         factor -> ( expression ) | var | call | integer | float
