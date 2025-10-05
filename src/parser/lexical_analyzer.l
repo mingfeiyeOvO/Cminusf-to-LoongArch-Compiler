@@ -88,5 +88,4 @@ float     {pos_start = pos_end; pos_end += 5; pass_node(yytext); return FLOAT;}
 
 . { pos_start = pos_end; pos_end++; return ERROR; }
 
- /****请在此补全所有flex的模式与动作  end******/
 %%

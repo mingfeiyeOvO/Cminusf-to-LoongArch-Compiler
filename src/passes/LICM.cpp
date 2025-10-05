@@ -78,7 +78,6 @@ void LoopInvariantCodeMotion::collect_loop_info(
     for (auto &sub_loop : loop->get_sub_loops()) {
         collect_loop_info(sub_loop, loop_instructions, updated_global, contains_impure_call);
     }
-    //throw std::runtime_error("Lab4: 你有一个TODO需要完成！");
 }
 
 /**
@@ -178,7 +177,6 @@ void LoopInvariantCodeMotion::run_on_loop(std::shared_ptr<Loop> loop) {
                 changed = true;
             }
         }
-        //throw std::runtime_error("Lab4: 你有一个TODO需要完成！");
     } while (changed);
 
     if (loop->get_preheader() == nullptr) {
@@ -204,7 +202,6 @@ void LoopInvariantCodeMotion::run_on_loop(std::shared_ptr<Loop> loop) {
                 phi_inst_.set_operand(i + 1, loop->get_preheader());
             }
         }
-        //throw std::runtime_error("Lab4: 你有一个TODO需要完成！");
     }
     
     // 将所有非 latch 的 header 前驱块的跳转指向 preheader
@@ -238,7 +235,6 @@ void LoopInvariantCodeMotion::run_on_loop(std::shared_ptr<Loop> loop) {
         pred->add_succ_basic_block(preheader);  // 将 preheader 作为后继块
         preheader->add_pre_basic_block(pred);   // 将 pred 作为 preheader 的前驱块
         pred_to_remove.push_back(pred);
-        //throw std::runtime_error("Lab4: 你有一个TODO需要完成！");
     }
 
     for (auto &pred : pred_to_remove) {
@@ -261,7 +257,6 @@ void LoopInvariantCodeMotion::run_on_loop(std::shared_ptr<Loop> loop) {
         // 将该指令添加到 preheader 中
         preheader->add_instruction(instr);
     }
-    //throw std::runtime_error("Lab4: 你有一个TODO需要完成！");
 
     // insert preheader br to header
     BranchInst::create_br(loop->get_header(), preheader);
